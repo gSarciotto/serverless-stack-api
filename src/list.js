@@ -7,7 +7,7 @@ export const main = handler(async (event, context) => {
         KeyConditionExpression: "userId = :userId",
         ExpressionAttributeValues: {
             //provides the value for :userId in the condition above
-            ":userId": "123"
+            ":userId": event.requestContext.identity.cognitoIdentityId,
         }
     };
     const result = await dynamoDb.query(params);
